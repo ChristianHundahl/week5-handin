@@ -48,7 +48,6 @@
     function makeTable(cars) {
         const myTable = document.getElementById("car-table-body")
         const tableData = cars.map(function(car) {return "<td>" + car.id+ "</td>" + "<td>" + car.year + "</td>" + "<td>" + car.make + "</td>" + "<td>" + car.model + "</td>" + "<td>" + car.price + "</td>"})
-        console.log(tableData)
         tableData.forEach(car=> console.log(car))
         myTable.innerHTML = tableData.map(car => `<tr>${(car)}</tr>`).join("")
     }
@@ -70,27 +69,43 @@
         makeTable(carsFilteredByMake)
     }
 
-    let sortDirection = false
-
+    let priceSorting = false
     function sortByPrice(evt) {
         evt.preventDefault()
-        if (sortDirection === false) {
+        if (priceSorting === false) {
             const carsSortedByPriceAsc = cars.sort(function(a, b) {return a.price - b.price})
             makeTable(carsSortedByPriceAsc)
-            sortDirection = true
-            console.log(sortDirection)
+            priceSorting = true
+            console.log(priceSorting)
         }
         else {
             const carsSortedByPriceDsc = cars.sort(function(a, b) {return b.price - a.price})
             makeTable(carsSortedByPriceDsc)
-            sortDirection = false
-            console.log(sortDirection)
+            priceSorting = false
+            console.log(priceSorting)
         }
     }
 
-    function sortById(evt) {
+    let idSorting = false
+    function sortById(evt) { //Not working -don't understand why (╯°□°）╯︵ ┻━┻ something about the sorting method?//TODO: fix
         evt.preventDefault()
+        if (idSorting === false) {
+            const carsSortedByPriceAsc = cars.sort(function(a, b) {return a.price - b.price})
+            makeTable(carsSortedByPriceAsc)
+            idSorting = true
+            console.log(priceSorting)
+        }
+        else {
+            const carsSortedByPriceDsc = cars.sort(function(a, b) {return b.price - a.price})
+            makeTable(carsSortedByPriceDsc)
+            idSorting = false
+            console.log(priceSorting)
+        }
     }
+
+    function sortByMake() {}
+
+    function sortByModel() {}
 
     function clear(evt) {
         evt.preventDefault()
@@ -102,9 +117,9 @@
     document.getElementById("filter-make-btn").onclick = filterByMake
 
     //Sorters
-    document.getElementById("id-header").addEventListener("click", sortByPrice)
-    document.getElementById("make-header").addEventListener("click", sortByPrice)
-    document.getElementById("model-header").addEventListener("click", sortByPrice)
+    document.getElementById("id-header").addEventListener("click", sortById)
+    document.getElementById("make-header").addEventListener("click", sortByMake)
+    document.getElementById("model-header").addEventListener("click", sortByModel)
     document.getElementById("price-header").addEventListener("click", sortByPrice)
 
 </script>
