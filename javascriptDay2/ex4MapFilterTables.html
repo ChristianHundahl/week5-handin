@@ -14,16 +14,26 @@
 <table id="my-table" class="table">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Year</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Price</th>
+        <th id="id-header">Id</th>
+        <th id="year-header">Year</th>
+        <th id="make-header">Make</th>
+        <th id="model-header">Model</th>
+        <th id="price-header">Price</th>
     </tr>
     </thead>
     <tbody id="car-table-body">
     </tbody>
 </table>
+
+<input type="text" id="filter-price-field" onfocus=" ">
+<button id="filter-price-btn">Price less than</button>
+<br>
+
+<input type="text" id="filter-make-field" onfocus=" ">
+<button id="filter-make-btn">Make of</button>
+<br>
+
+<button id="clear-btn">Clear</button>
 
 <script>
     const cars = [
@@ -34,6 +44,7 @@
         { id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799 }
     ]
 
+
     function makeTable(cars) {
         const myTable = document.getElementById("car-table-body")
         const tableData = cars.map(function(car) {return "<td>" + car.id+ "</td>" + "<td>" + car.year + "</td>" + "<td>" + car.make + "</td>" + "<td>" + car.model + "</td>" + "<td>" + car.price + "</td>"})
@@ -42,6 +53,59 @@
         myTable.innerHTML = tableData.map(car => `<tr>${(car)}</tr>`).join("")
     }
     makeTable(cars)
+
+    function filterByPrice(evt) {
+        evt.preventDefault()
+        const inputField = document.getElementById("filter-price-field")
+        const filterValue = inputField.value
+        const carsFilteredByPrice = cars.filter(function(car) {return car.price < filterValue})
+        makeTable(carsFilteredByPrice)
+    }
+
+    function filterByMake(evt) {
+        evt.preventDefault()
+        const inputField = document.getElementById("filter-make-field")
+        const filterValue = inputField.value
+        const carsFilteredByMake = cars.filter(function(car) {return car.make === filterValue})
+        makeTable(carsFilteredByMake)
+    }
+
+    let sortDirection = false
+
+    function sortByPrice(evt) {
+        evt.preventDefault()
+        if (sortDirection === false) {
+            const carsSortedByPriceAsc = cars.sort(function(a, b) {return a.price - b.price})
+            makeTable(carsSortedByPriceAsc)
+            sortDirection = true
+            console.log(sortDirection)
+        }
+        else {
+            const carsSortedByPriceDsc = cars.sort(function(a, b) {return b.price - a.price})
+            makeTable(carsSortedByPriceDsc)
+            sortDirection = false
+            console.log(sortDirection)
+        }
+    }
+
+    function sortById(evt) {
+        evt.preventDefault()
+    }
+
+    function clear(evt) {
+        evt.preventDefault()
+        makeTable(cars)
+    }
+
+    document.getElementById("filter-price-btn").onclick = filterByPrice
+    document.getElementById("clear-btn").onclick = clear
+    document.getElementById("filter-make-btn").onclick = filterByMake
+
+    //Sorters
+    document.getElementById("id-header").addEventListener("click", sortByPrice)
+    document.getElementById("make-header").addEventListener("click", sortByPrice)
+    document.getElementById("model-header").addEventListener("click", sortByPrice)
+    document.getElementById("price-header").addEventListener("click", sortByPrice)
 
 </script>
 
