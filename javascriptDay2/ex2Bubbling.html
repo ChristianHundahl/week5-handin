@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubbling</title>
+    <style>
+        .myDiv{
+            width: 25px;
+            height: 25px;
+            background-color:yellow;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+<p>In a new HTML page add two div’s, each with a unique id
+    <br>Style both id’s with this class:
+    .mydiv {width: 25px; height: 25px;background-color:yellow; margin:1px;}
+
+<ul style="list-style-type: lower-alpha">
+    <li>Add a click handler to each div and write code, so when clicked, each div will write to the console "Hi from idOfTheDiv".</li>
+        <div id="divA" class="myDiv"></div>
+        <div id="divB" class="myDiv"></div>
+
+    <li>Now, using cut and paste, add 10 more divs (still each with a unique id).
+        <div id="outer">
+        <div id="divC" class="myDiv"></div>
+        <div id="divD" class="myDiv"></div>
+        <div id="divE" class="myDiv"></div>
+        <div id="divF" class="myDiv"></div>
+        <div id="divG" class="myDiv"></div>
+        <div id="divH" class="myDiv"></div>
+        <div id="divI" class="myDiv"></div>
+        <div id="divJ" class="myDiv"></div>
+        <div id="divK" class="myDiv"></div>
+        <div id="divL" class="myDiv"></div>
+        </div>
+        Add a new div with the id="outer" around all our div’s and assign a single click eventhandler (with the event argument)  to this div.
+    </li>
+    <li>Add an empty paragraph tag, with an id, to your HTML and change the code for both exercises above, so that output is not written to the console, but into this paragraph.
+        <p id="paragraph1"></p>
+    </li>
+    </ul>
+</p>
+
+
+<script>
+    //to console: document.getElementById("divA").onclick= (e)=>console.log("Hello form divA!")
+
+    //To alert message:
+    document.getElementById("divC").onclick= (e)=>alert(e.target.id)
+    document.getElementById("divD").onclick= (e)=>alert(e.target.id)
+    document.getElementById("divE").onclick= (e)=>alert(e.target.id)
+
+    //To paragraph:
+    document.getElementById("outer").onclick = (e) => {//Handles the above function for all divs inside div="outer"
+        if(e.target.id ==="outer"){
+            return
+        }
+        document.getElementById("paragraph1").innerText = (e.target.id)}
+
+
+</script>
+
+</body>
+</html>
