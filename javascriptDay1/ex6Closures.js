@@ -39,10 +39,10 @@ function personDetails(){
         this.myName = name
     }
     return {
-        changeAge : function(age) {
+        setAge : function(age) {
             setAge(age)
         },
-        changeName : function(name) {
+        setName : function(name) {
             setName(name)
         },
         getInfo : function() {
@@ -52,6 +52,10 @@ function personDetails(){
 
 }
 person1 = personDetails()
-person1.changeAge(12)
-person1.changeName("Mark")
+person1.setAge(12)
+person1.setName("Mark")
 console.log(person1.getInfo())
+person1.setAge(13)
+console.log(person1.getInfo())//Works good
+person1.setName("Mark C")
+console.log(person1.getInfo())//Works good
