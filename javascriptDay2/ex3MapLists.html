@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Maps, Filters and Lists</title>
 </head>
 <body>
 
+<h1>Maps, Filters and Lists</h1>
+<ul style="list-style-type: lower-alpha">
+    <li>Yesterday you used the array types map and join methods to create a UL with a number of names. Use this function+DOM manipulation to insert the UL somewhere in an HTML page.</li>
+
+    <li>Create a FORM with an input field + a submit button as sketched here.
+        Write the necessary code to add the new name to the array of names, and regenerate the '< ul >' with the updated list.
+        Hint: You will probably see, very shortly that the name is added, the screen flickers and it's gone again.
+        The problem is that it submits to the server, so the full page is reloaded.
+        To prevent this you can call .preventDefault() on the event argument which will prevent the default behaviour
+        (submit) and it should work. You can also use preventDefault() to prevent a link from actually forwarding to the link-address.
+    </li>
+    <li>Add two more buttons to the form with the text:  “remove first” and  “remove last”. Implement the behaviour inspired by how you solved part-b.</li>
+
+</ul>
+
+<ul id="my-ul"></ul>
+<form>
+    <input type="text" id="text" onfocus=" "><br>
+    <button id="add-btn">Add name</button><br>
+    <button id="remove-btn">Remove first name</button><br>
+    <button id="remove-btn2">Remove last name</button><br>
+</form>
+
 </body>
+
+<script>
+    const names = ["Lars", "Peter", "Jan", "Lise", "Janne", "Sofie"]
+    function makeList(){
+        //const lis = names.filter(n=>n.length>4).map(n => `<li>${(n)}</li>`).join("")//For-each by lambda
+        //Can also be used with table row (tr)
+        const myUl = document.getElementById("my-ul")
+        myUl.innerHTML = names.filter(n=>n.length>4).map(n => `<li>${(n)}</li>`).join("")//Note only names over 4 characters allowed
+    }
+    makeList()//Here list is created
+    function addName(evt){ //evt = event, in this case onclick from document.getElementById("add-btn").onclick = addName
+        evt.preventDefault()//Prevents reload from server
+        const inputField = document.getElementById("text")
+        const newName = inputField.value
+        names.push(newName)
+        makeList()
+        alert("Added name")
+    }
+    function removeFirstName(evt){
+        evt.preventDefault()
+        names.shift()
+        makeList()
+        alert("Removed first name")
+    }
+    function removeLastName(evt){
+        evt.preventDefault()
+        names.splice(-1)
+        makeList()
+        alert("Removed last name")
+    }
+    document.getElementById("add-btn").onclick = addName
+    document.getElementById("remove-btn").onclick = removeFirstName
+    document.getElementById("remove-btn2").onclick = removeLastName
+</script>
 </html>
